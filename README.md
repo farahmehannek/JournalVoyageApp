@@ -1,25 +1,25 @@
 files:
   README.md: |
-    # 📔 JournalVoyageApp
+    #  JournalVoyageApp
 
     Application mobile **React Native** permettant de conserver un **journal de voyage** sous forme de photos géolocalisées.  
     Chaque photo est enregistrée avec sa date et sa position GPS, puis affichée dans plusieurs vues : **Galerie, Carte, Calendrier et Profil**.
 
     ---
 
-    ## 🎯 Objectifs du projet
+    ##  Objectifs du projet
     - Développer une application mobile Android avec **React Native**.
     - Sauvegarder des **photos** avec leur **localisation GPS**.
     - Permettre plusieurs visualisations :
-      - 📷 **Caméra** : prise de photo + GPS
-      - 🖼 **Photos** : galerie locale
-      - 🗺 **Carte** : affichage sur une carte (OpenStreetMap via MapLibre)
-      - 📅 **Calendrier** : marquer les jours où des photos ont été prises
-      - 👤 **Profil** : avatar + statistiques (nombre de photos, première et dernière date)
+      -  **Caméra** : prise de photo + GPS
+      - **Photos** : galerie locale
+      - **Carte** : affichage sur une carte (OpenStreetMap via MapLibre)
+      - **Calendrier** : marquer les jours où des photos ont été prises
+      - **Profil** : avatar + statistiques (nombre de photos, première et dernière date)
 
     ---
 
-    ## ⚙️ Technologies utilisées
+    ##  Technologies utilisées
     - **React Native 0.81.1**
     - **React Navigation** (`@react-navigation/native`, `@react-navigation/bottom-tabs`)
     - **AsyncStorage** pour le stockage local
@@ -30,7 +30,7 @@ files:
 
     ---
 
-    ## 🪜 Installation & configuration
+    ##  Installation & configuration
 
     ### 1. Prérequis
     - **Windows 10/11**
@@ -70,36 +70,32 @@ files:
     ### 6. Compiler et installer sur le téléphone
     ```bash
     npx react-native run-android --device <ID_DEVICE>
-    ```
-    ⚠️ Remplace `<ID_DEVICE>` par l’ID retourné par `adb devices` (ex. `R58N42FX5QD`).
+    
+    ##  Fonctionnalités
 
-    ---
-
-    ## 📱 Fonctionnalités
-
-    ### 📷 Caméra
+    ###  Caméra
     - Prendre une photo avec l’appareil photo du téléphone
     - Demande des permissions **Caméra** et **GPS**
     - Enregistre `{ id, uri, date, latitude, longitude }` dans AsyncStorage
 
-    ### 🖼 Galerie (Photos)
+    ###  Galerie (Photos)
     - Liste toutes les photos sauvegardées
     - Affichage avec miniature et date
     - Suppression d’une photo ou de toutes
     - Rafraîchissement automatique à chaque retour sur l’onglet
 
-    ### 🗺 Carte
+    ###  Carte
     - Fond de carte OpenStreetMap via **MapLibre**
     - Marqueurs aux coordonnées GPS de chaque photo
     - Aperçu miniature + date sur chaque marqueur
     - Pas besoin de clé API Google (pas de CB)
 
-    ### 📅 Calendrier
+    ###  Calendrier
     - Librairie `react-native-calendars`
     - Marque les jours où des photos ont été prises (dot bleu)
     - Navigation mois par mois
 
-    ### 👤 Profil
+    ###  Profil
     - Avatar + nom du voyageur
     - Compteur total de photos
     - Date de la **première photo**
@@ -109,7 +105,7 @@ files:
 
     ---
 
-    ## 🛠 Commandes principales
+    ##  Commandes principales
 
     ### Lancer Metro
     ```bash
@@ -139,7 +135,7 @@ files:
 
     ---
 
-    ## 🚧 Problèmes rencontrés & solutions
+    ##  Problèmes rencontrés & solutions
 
     - **Port 8081 occupé** → tuer le processus Node et relancer Metro  
     - **SDK location not found** → créer `android/local.properties` avec :  
@@ -153,7 +149,7 @@ files:
 
     ---
 
-    ## 👥 Équipe
+    ##  Équipe
 
     - **Farah** – Caméra & Profil  
     - **Amine** – Carte (MapLibre / OpenStreetMap)  
@@ -162,7 +158,7 @@ files:
 
     ---
 
-    ## 🎬 Démo prévue
+    ##  Démo prévue
     1. Prendre une photo → autorisations + GPS  
     2. Vérifier la photo en Galerie  
     3. Voir l’emplacement exact sur la Carte  
