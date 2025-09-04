@@ -1,97 +1,206 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+files:
+  README.md: |
+    # 📔 JournalVoyageApp
 
-# Getting Started
+    Application mobile **React Native** permettant de conserver un **journal de voyage** sous forme de photos géolocalisées.  
+    Chaque photo est enregistrée avec sa date et sa position GPS, puis affichée dans plusieurs vues : **Galerie, Carte, Calendrier et Profil**.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+    ---
 
-## Step 1: Start Metro
+    ## 🎯 Objectifs du projet
+    - Développer une application mobile Android avec **React Native**.
+    - Sauvegarder des **photos** avec leur **localisation GPS**.
+    - Permettre plusieurs visualisations :
+      - 📷 **Caméra** : prise de photo + GPS
+      - 🖼 **Photos** : galerie locale
+      - 🗺 **Carte** : affichage sur une carte (OpenStreetMap via MapLibre)
+      - 📅 **Calendrier** : marquer les jours où des photos ont été prises
+      - 👤 **Profil** : avatar + statistiques (nombre de photos, première et dernière date)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+    ---
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+    ## ⚙️ Technologies utilisées
+    - **React Native 0.81.1**
+    - **React Navigation** (`@react-navigation/native`, `@react-navigation/bottom-tabs`)
+    - **AsyncStorage** pour le stockage local
+    - **react-native-image-picker** pour la caméra
+    - **@react-native-community/geolocation** pour le GPS
+    - **react-native-calendars** pour l’affichage du calendrier
+    - **MapLibre (OpenStreetMap)** pour la carte (pas besoin de clé API)
 
-```sh
-# Using npm
-npm start
+    ---
 
-# OR using Yarn
-yarn start
-```
+    ## 🪜 Installation & configuration
 
-## Step 2: Build and run your app
+    ### 1. Prérequis
+    - **Windows 10/11**
+    - **Node.js ≥ 20**
+    - **JDK 17** (OpenJDK)
+    - **Android SDK** installé dans `C:\Android\sdk`
+      - `platform-tools`
+      - `build-tools;34.0.0`
+      - `platforms;android-34`
+    - **Téléphone Android** avec :
+      - Options développeur activées
+      - **Débogage USB** activé
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+    ---
 
-### Android
+    ### 2. Cloner le projet
+    ```bash
+    git clone https://github.com/farahmehannek/JournalVoyageApp.git
+    cd JournalVoyageApp
+    ```
 
-```sh
-# Using npm
-npm run android
+    ### 3. Installer les dépendances
+    ```bash
+    npm install
+    ```
 
-# OR using Yarn
-yarn android
-```
+    ### 4. Vérifier que le téléphone est détecté
+    ```bash
+    adb devices
+    ```
 
-### iOS
+    ### 5. Lancer Metro (serveur JS)
+    ```bash
+    npx react-native start --reset-cache
+    ```
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+    ### 6. Compiler et installer sur le téléphone
+    ```bash
+    npx react-native run-android --device <ID_DEVICE>
+    ```
+    ⚠️ Remplace `<ID_DEVICE>` par l’ID retourné par `adb devices` (ex. `R58N42FX5QD`).
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+    ---
 
-```sh
-bundle install
-```
+    ## 📱 Fonctionnalités
 
-Then, and every time you update your native dependencies, run:
+    ### 📷 Caméra
+    - Prendre une photo avec l’appareil photo du téléphone
+    - Demande des permissions **Caméra** et **GPS**
+    - Enregistre `{ id, uri, date, latitude, longitude }` dans AsyncStorage
 
-```sh
-bundle exec pod install
-```
+    ### 🖼 Galerie (Photos)
+    - Liste toutes les photos sauvegardées
+    - Affichage avec miniature et date
+    - Suppression d’une photo ou de toutes
+    - Rafraîchissement automatique à chaque retour sur l’onglet
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+    ### 🗺 Carte
+    - Fond de carte OpenStreetMap via **MapLibre**
+    - Marqueurs aux coordonnées GPS de chaque photo
+    - Aperçu miniature + date sur chaque marqueur
+    - Pas besoin de clé API Google (pas de CB)
 
-```sh
-# Using npm
-npm run ios
+    ### 📅 Calendrier
+    - Librairie `react-native-calendars`
+    - Marque les jours où des photos ont été prises (dot bleu)
+    - Navigation mois par mois
 
-# OR using Yarn
-yarn ios
-```
+    ### 👤 Profil
+    - Avatar + nom du voyageur
+    - Compteur total de photos
+    - Date de la **première photo**
+    - Date de la **dernière photo**
+    - Bouton **Actualiser**
+    - Rafraîchissement auto à chaque fois que l’onglet est ouvert
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+    ---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+    ## 🛠 Commandes principales
 
-## Step 3: Modify your app
+    ### Lancer Metro
+    ```bash
+    npx react-native start --reset-cache
+    ```
 
-Now that you have successfully run the app, let's make changes!
+    ### Compiler & installer l’application
+    ```bash
+    npx react-native run-android --device <ID_DEVICE>
+    ```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+    ### Vérifier connexion appareil
+    ```bash
+    adb devices
+    ```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+    ### Dépannage
+    - Port 8081 bloqué :
+      ```bash
+      taskkill /F /IM node.exe
+      npx react-native start --reset-cache
+      ```
+    - Nettoyer Gradle :
+      ```bash
+      cd android && .\gradlew clean && cd ..
+      ```
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+    ---
 
-## Congratulations! :tada:
+    ## 🚧 Problèmes rencontrés & solutions
 
-You've successfully run and modified your React Native App. :partying_face:
+    - **Port 8081 occupé** → tuer le processus Node et relancer Metro  
+    - **SDK location not found** → créer `android/local.properties` avec :  
+      ```
+      sdk.dir=C:\\Android\\sdk
+      ```
+    - **Chemins trop longs (>260 caractères)** → déplacer le projet dans `C:\JournalVoyageApp`
+    - **ADB non reconnu** → ajouter `C:\Android\sdk\platform-tools` au `PATH`
+    - **GPS lent ou timeout** → fallback : haute précision → normal → dernière position connue
+    - **Carte orange (MapLibre)** → utiliser un fond raster OpenStreetMap
 
-### Now what?
+    ---
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+    ## 👥 Équipe
 
-# Troubleshooting
+    - **Farah** – Caméra & Profil  
+    - **Amine** – Carte (MapLibre / OpenStreetMap)  
+    - **[Nom collègue 3]** – Calendrier  
+    - **[Nom collègue 4]** – Galerie Photos  
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+    ---
 
-# Learn More
+    ## 🎬 Démo prévue
+    1. Prendre une photo → autorisations + GPS  
+    2. Vérifier la photo en Galerie  
+    3. Voir l’emplacement exact sur la Carte  
+    4. Vérifier que la date est marquée dans le Calendrier  
+    5. Voir le compteur mis à jour dans le Profil  
 
-To learn more about React Native, take a look at the following resources:
+    ---
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+  .gitignore: |
+    # Node modules
+    node_modules/
+
+    # Logs
+    npm-debug.log*
+    yarn-debug.log*
+    yarn-error.log*
+
+    # React Native
+    /android/.gradle/
+    /android/app/build/
+    /android/build/
+    /ios/Pods/
+    *.iml
+    .gradle/
+    .idea/
+
+    # Metro / cache
+    .metro/
+    .expo/
+    dist/
+    tmp/
+
+    # Build
+    build/
+    *.apk
+    *.aar
+    *.keystore
+
+    # macOS / Windows
+    .DS_Store
+    Thumbs.db
